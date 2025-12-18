@@ -1006,7 +1006,6 @@ object CaliForm: TCaliForm
     Appearance.Font.Name = 'Tahoma'
     Appearance.Font.Style = [fsBold]
     Appearance.Spacing = 0
-    Appearance.SimpleLayout = False
     Appearance.Rounding = 3
     Appearance.WordWrapping = False
     Status.Caption = '0'
@@ -1029,7 +1028,7 @@ object CaliForm: TCaliForm
     Color = clWhite
     ParentFont = False
     TabOrder = 3
-    Version = '2.2.1.4'
+    Version = '2.1.1.5'
     OnClick = btnApplyClick
     TMSStyle = 8
   end
@@ -1046,7 +1045,6 @@ object CaliForm: TCaliForm
     Appearance.Font.Name = 'Tahoma'
     Appearance.Font.Style = [fsBold]
     Appearance.Spacing = 0
-    Appearance.SimpleLayout = False
     Appearance.Rounding = 3
     Appearance.WordWrapping = False
     Status.Caption = '0'
@@ -1069,7 +1067,7 @@ object CaliForm: TCaliForm
     Color = clWhite
     ParentFont = False
     TabOrder = 4
-    Version = '2.2.1.4'
+    Version = '2.1.1.5'
     OnClick = btnSaveClick
     TMSStyle = 8
   end
@@ -1086,7 +1084,6 @@ object CaliForm: TCaliForm
     Appearance.Font.Name = 'Tahoma'
     Appearance.Font.Style = [fsBold]
     Appearance.Spacing = 0
-    Appearance.SimpleLayout = False
     Appearance.Rounding = 3
     Appearance.WordWrapping = False
     Status.Caption = '0'
@@ -1109,7 +1106,7 @@ object CaliForm: TCaliForm
     Color = clWhite
     ParentFont = False
     TabOrder = 5
-    Version = '2.2.1.4'
+    Version = '2.1.1.5'
     OnClick = btnLoadClick
     TMSStyle = 8
   end
@@ -1126,7 +1123,6 @@ object CaliForm: TCaliForm
     Appearance.Font.Name = 'Tahoma'
     Appearance.Font.Style = [fsBold]
     Appearance.Spacing = 0
-    Appearance.SimpleLayout = False
     Appearance.Rounding = 3
     Appearance.WordWrapping = False
     Status.Caption = '0'
@@ -1149,7 +1145,7 @@ object CaliForm: TCaliForm
     Color = clWhite
     ParentFont = False
     TabOrder = 6
-    Version = '2.2.1.4'
+    Version = '2.1.1.5'
     OnClick = btnInitClick
     TMSStyle = 8
   end
@@ -1213,7 +1209,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1236,7 +1231,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 2
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnProbeCloseClick
       TMSStyle = 8
     end
@@ -1253,7 +1248,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1276,7 +1270,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 3
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnAuto1Click
       TMSStyle = 8
     end
@@ -1293,7 +1287,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1316,7 +1309,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 4
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnStopClick
       TMSStyle = 8
     end
@@ -1385,7 +1378,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1408,7 +1400,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 2
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnIrClick
       TMSStyle = 8
     end
@@ -1514,7 +1506,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1537,7 +1528,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 4
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnStandardClick
       TMSStyle = 8
     end
@@ -1555,7 +1546,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1578,7 +1568,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 5
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnStandardClick
       TMSStyle = 8
     end
@@ -1633,7 +1623,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1656,7 +1645,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 8
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnStandardClick
       TMSStyle = 8
     end
@@ -1674,6 +1663,7 @@ object CaliForm: TCaliForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 10
+    Visible = False
     object Label4: TLabel
       Left = 2
       Top = 107
@@ -1779,7 +1769,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1802,15 +1791,15 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 4
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = ConfigBtn1Click
       TMSStyle = 8
     end
   end
   object btn_Change: TAdvSmoothButton
-    Left = 1434
+    Left = 1441
     Top = 81
-    Width = 82
+    Width = 74
     Height = 25
     Appearance.GlowPercentage = 50
     Appearance.PictureAlignment = taCenter
@@ -1820,7 +1809,6 @@ object CaliForm: TCaliForm
     Appearance.Font.Name = 'Tahoma'
     Appearance.Font.Style = [fsBold]
     Appearance.Spacing = 0
-    Appearance.SimpleLayout = False
     Appearance.Rounding = 3
     Appearance.WordWrapping = False
     Status.Caption = '0'
@@ -1844,13 +1832,13 @@ object CaliForm: TCaliForm
     ParentFont = False
     TabOrder = 11
     Visible = False
-    Version = '2.2.1.4'
+    Version = '2.1.1.5'
     OnClick = btn_ChangeClick
     TMSStyle = 8
   end
   object pnlConfig: TAdvSmoothPanel
-    Left = 1048
-    Top = 264
+    Left = 1272
+    Top = 600
     Width = 185
     Height = 118
     Cursor = crDefault
@@ -1882,7 +1870,7 @@ object CaliForm: TCaliForm
     Fill.Rounding = 5
     Fill.ShadowOffset = 0
     Fill.Glow = gmNone
-    Version = '1.7.1.2'
+    Version = '1.5.2.1'
     Visible = False
     TabOrder = 12
     TMSStyle = 0
@@ -1910,7 +1898,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1933,7 +1920,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 0
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnCloseConnConfigClick
       TMSStyle = 8
     end
@@ -1948,7 +1935,6 @@ object CaliForm: TCaliForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -1971,7 +1957,7 @@ object CaliForm: TCaliForm
       Color = clWhite
       ParentFont = False
       TabOrder = 1
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnSaveConnConfigClick
       TMSStyle = 8
     end

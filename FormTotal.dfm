@@ -671,6 +671,42 @@ object TotalForm: TTotalForm
           TabOrder = 5
         end
       end
+      object pnlIRSpec: TPanel
+        Left = 575
+        Top = 118
+        Width = 148
+        Height = 23
+        BevelKind = bkFlat
+        BevelOuter = bvNone
+        Caption = 'IR 12.5 ~ 40.5'
+        Color = 16771289
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 3
+      end
+      object pnlOCVSpec: TPanel
+        Left = 729
+        Top = 116
+        Width = 148
+        Height = 25
+        BevelKind = bkFlat
+        BevelOuter = bvNone
+        Caption = 'OCV 1200 ~ 3500'
+        Color = 16771289
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 4
+      end
     end
     object flowChart: TPanel
       Left = 17
@@ -1029,6 +1065,7 @@ object TotalForm: TTotalForm
         Font.Style = [fsBold]
         ParentFont = False
         OnClick = Label8Click
+        OnDblClick = Label8DblClick
       end
       object chkCycle: TCheckBox
         Left = 482
@@ -1063,6 +1100,7 @@ object TotalForm: TTotalForm
         ParentShowHint = False
         ShowHint = False
         TabOrder = 1
+        Visible = False
         OnMouseUp = chkBypassMouseUp
       end
       object Panel6: TPanel
@@ -1167,9 +1205,6 @@ object TotalForm: TTotalForm
           Text = 'EDIT1'
           Visible = False
           OnKeyDown = editTrayIdKeyDown
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 344
           ExplicitHeight = 29
         end
       end
@@ -1241,7 +1276,7 @@ object TotalForm: TTotalForm
       Status.Appearance.Font.Name = 'Tahoma'
       Status.Appearance.Font.Style = []
       BevelColor = clMedGray
-      Caption = 'Remeasure Info'
+      Caption = 'NG Info'
       Color = clWhite
       ParentFont = False
       TabOrder = 11

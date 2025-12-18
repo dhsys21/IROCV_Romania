@@ -338,7 +338,6 @@ object MeasureInfoForm: TMeasureInfoForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -361,7 +360,7 @@ object MeasureInfoForm: TMeasureInfoForm
       Color = clWhite
       ParentFont = False
       TabOrder = 4
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnInitClick
       TMSStyle = 8
     end
@@ -385,7 +384,6 @@ object MeasureInfoForm: TMeasureInfoForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -408,7 +406,7 @@ object MeasureInfoForm: TMeasureInfoForm
       Color = clWhite
       ParentFont = False
       TabOrder = 6
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = btnSaveClick
       TMSStyle = 8
     end
@@ -462,7 +460,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -485,7 +482,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 1
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnOcvClick
         TMSStyle = 8
       end
@@ -500,7 +497,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -523,7 +519,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 2
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnIrClick
         TMSStyle = 8
       end
@@ -552,7 +548,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -575,7 +570,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 0
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnAutoClick
         TMSStyle = 8
       end
@@ -590,7 +585,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -613,7 +607,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 1
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnStopClick
         TMSStyle = 8
       end
@@ -642,7 +636,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -665,7 +658,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 0
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnStopClick
         TMSStyle = 8
       end
@@ -680,7 +673,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -703,7 +695,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 1
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = btnProbeClick
         TMSStyle = 8
       end
@@ -757,7 +749,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -780,7 +771,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 0
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = advMSAStartClick
         TMSStyle = 8
       end
@@ -795,7 +786,6 @@ object MeasureInfoForm: TMeasureInfoForm
         Appearance.Font.Name = 'Tahoma'
         Appearance.Font.Style = [fsBold]
         Appearance.Spacing = 0
-        Appearance.SimpleLayout = False
         Appearance.Rounding = 3
         Appearance.WordWrapping = False
         Status.Caption = '0'
@@ -818,7 +808,7 @@ object MeasureInfoForm: TMeasureInfoForm
         Color = clWhite
         ParentFont = False
         TabOrder = 1
-        Version = '2.2.1.4'
+        Version = '2.1.1.5'
         OnClick = advMSAStopClick
         TMSStyle = 8
       end
@@ -868,7 +858,6 @@ object MeasureInfoForm: TMeasureInfoForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -891,7 +880,7 @@ object MeasureInfoForm: TMeasureInfoForm
       Color = clWhite
       ParentFont = False
       TabOrder = 0
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = advBtnRemeasureClick
       TMSStyle = 8
     end
@@ -906,7 +895,6 @@ object MeasureInfoForm: TMeasureInfoForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -929,10 +917,27 @@ object MeasureInfoForm: TMeasureInfoForm
       Color = clWhite
       ParentFont = False
       TabOrder = 1
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = advRemeasureTrayOutClick
       TMSStyle = 8
     end
+  end
+  object Panel4: TPanel
+    Left = 125
+    Top = 9
+    Width = 400
+    Height = 25
+    BevelOuter = bvNone
+    Caption = 'IR/OCV'
+    Color = 8552834
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 5
   end
   object SaveDialog: TSaveDialog
     DefaultExt = '*.csv'

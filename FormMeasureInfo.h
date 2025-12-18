@@ -85,6 +85,7 @@ __published:	// IDE-managed Components
 	TLabel *MSA_COUNT_CHECK;
 	TLabel *MSA_time;
 	TTimer *GrapheTimer;
+	TPanel *Panel4;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall btnSaveClick(TObject *Sender);
 	void __fastcall btnIrClick(TObject *Sender);

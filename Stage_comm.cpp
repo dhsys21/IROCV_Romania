@@ -43,6 +43,74 @@ void __fastcall TTotalForm::CmdForceStop_Original()
 //---------------------------------------------------------------------------
 // For PLC
 //---------------------------------------------------------------------------
+void __fastcall TTotalForm::CmdTrayOut_Cycle()
+{
+	AnsiString strNg = Form_PLCInterface->editNGChannel->Text;
+	vector<int> ngchannels = BaseForm->StringToVector(strNg);
+	int nTag = 0;
+    int ngCount = 0;
+	for(int i = 0; i < 25; ++i){
+		for(int j = 0; j < 16; j++)
+		{
+			int nChannel = i * 16 + j + 1;
+			if(find(ngchannels.begin(), ngchannels.end(), nChannel) != ngchannels.end())
+			{
+				Mod_PLC->SetData(Mod_PLC->pc_Interface_Data, PC_D_IROCV_MEASURE_OK_NG_01 + i, j, true);
+				ngCount++;
+
+                acc_remeasure[nChannel - 1] += 1;
+                tray.after_value[nChannel - 1] = 999.0;
+                tray.ocv_value[nChannel - 1] = 0;
+			}
+			else
+			{
+				Mod_PLC->SetData(Mod_PLC->pc_Interface_Data, PC_D_IROCV_MEASURE_OK_NG_01 + i, j, false);
+
+                tray.after_value[nChannel - 1] = BaseForm->StringToDouble(Form_PLCInterface->editIR->Text, 0) + (double)((nChannel - 1) * 0.01);
+                tray.ocv_value[nChannel - 1] = BaseForm->StringToDouble(Form_PLCInterface->editOCV->Text, 0) + (double)((nChannel - 1) * 0.1);
+			}
+		}
+	}
+
+	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_NG_COUNT, ngCount);
+
+    //* Write IR, OCV value
+    // ir value 2 Word
+	// 2 Word :  value / (65536 / 2) => 윗 주소에 쓰기, value % (65536 /2 ) => 아래 주소에 쓰기 // herald 2017 11 30
+	for(int i = 0; i < 200; i++)
+	{
+//        tray.after_value[i] = BaseForm->StringToDouble(Form_PLCInterface->editIR->Text, 0) + (double)(i * 0.01);
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data1, PC_D_IROCV_IR_VALUE + (i * 2), FormatFloat("0000", (tray.after_value[i] * 100)) % (256 * 256));
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data1, PC_D_IROCV_IR_VALUE + (i * 2) + 1, (tray.after_value[i] * 100) / (256 * 256));
+	}
+	for(int i = 0; i < 200; i++)
+	{
+//		tray.after_value[200 + i] = BaseForm->StringToDouble(Form_PLCInterface->editIR->Text, 0) + (double)((i + 200) * 0.01);
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data2, PC_D_IROCV_IR_VALUE + (i * 2), FormatFloat("0000", (tray.after_value[200 + i] * 100)) % (256 * 256));
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data2, PC_D_IROCV_IR_VALUE + (i * 2) + 1, (tray.after_value[200+i] * 100) / (256 * 256));
+	}
+
+	for(int i = 0; i < 200; i++)
+	{
+//        tray.ocv_value[i] = BaseForm->StringToDouble(Form_PLCInterface->editOCV->Text, 0) + (double)(i * 0.1);
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data1, PC_D_IROCV_OCV_VALUE + (i * 2), FormatFloat("00000", (tray.ocv_value[i] * 10)) % (256 * 256));
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data1, PC_D_IROCV_OCV_VALUE + (i * 2) + 1, (tray.ocv_value[i] * 10) / (256 * 256));
+	}
+	for(int i = 0; i < 200; i++)
+	{
+//        tray.ocv_value[200 + i] = BaseForm->StringToDouble(Form_PLCInterface->editOCV->Text, 0) + (double)((i + 200) * 0.1);
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data2, PC_D_IROCV_OCV_VALUE + (i * 2), FormatFloat("00000", (tray.ocv_value[200 + i] * 10)) % (256 * 256));
+		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data2, PC_D_IROCV_OCV_VALUE + (i * 2) + 1, (tray.ocv_value[200+i] * 10) / (256 * 256));
+	}
+
+    tray.amf = false;
+    nSection = STEP_FINISH;
+    nStep = 0;
+
+	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_TRAY_OUT, 1);
+    WritePLCLog("CmdTrayOut_Cycle", "IROCV TRAY OUT = 1");
+}
+//---------------------------------------------------------------------------
 void __fastcall TTotalForm::CmdTrayOut()
 {
 
@@ -132,13 +200,19 @@ void __fastcall TTotalForm::CmdGetSensorInfo()
 //---------------------------------------------------------------------------
 void __fastcall TTotalForm::CmdManualMod(bool Set)
 {
-	if(Set){
+	if(Set){ //* Manual
 		SendData("MAN", "O");
 		this->InitTrayStruct();
+
+        if(Timer_AutoInspection->Enabled == true)
+            Timer_AutoInspection->Enabled = false;
 	}
-	else{
+	else{ //* Auto
 		SendData("MAN", "X");
 		this->InitTrayStruct();
+
+        if(Timer_AutoInspection->Enabled == false)
+            Timer_AutoInspection->Enabled = true;
 	}
 }
 //---------------------------------------------------------------------------
@@ -373,12 +447,13 @@ void __fastcall TTotalForm::ProcessOcv(AnsiString param)
 	int index;
 
 	index = channel -1;
-	InsertOcvValue(channel, value);
+    if(CaliForm->stage != this->Tag){
+        InsertOcvValue(channel, value);
 
-	if(MeasureInfoForm->msaTimer->Enabled){
-		MeasureInfoForm->v_ocv[index].push_back(tray.after_value[index]);
-	}
-
+        if(MeasureInfoForm->msaTimer->Enabled){
+            MeasureInfoForm->v_ocv[index].push_back(tray.ocv_after_value[index]);
+        }
+    }
 
 //	SetProcessColor(index, OcvCheck);
 

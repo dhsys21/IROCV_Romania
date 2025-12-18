@@ -242,6 +242,8 @@ public:		// User declarations
 	double __fastcall GetDouble(unsigned char (*data)[2], int column);
 	AnsiString __fastcall GetString(unsigned char (*data)[2], int column, int count);
 
+    int __fastcall GetIRValue(int pc_address, int index);
+    int __fastcall GetOCVValue(int pc_address, int index);
 
 	unsigned char plc_Interface_Data[PLC_D_INTERFACE_LEN][2];
 

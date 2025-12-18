@@ -204,18 +204,22 @@ void __fastcall TMod_PLC::Timer_PC_WriteMsgTimer(TObject *Sender)
 				ClientSocket_PC->Socket->SendBuf(&pc_Data, sizeof(pc_Data));        // should comment for emulator
 				ClientSocket_PC->Socket->SendBuf(&pc_Interface_Data, sizeof(pc_Interface_Data));
 
+                Sleep(20);
 				PC_DataChange(0, PC_D_INTERFACE_IR1, DEVCODE_D, PC_D_INTERFACE_IR_LEN1);
 				ClientSocket_PC->Socket->SendBuf(&pc_Data, sizeof(pc_Data));        // should comment for emulator
 				ClientSocket_PC->Socket->SendBuf(&pc_Interface_IR_Data1, sizeof(pc_Interface_IR_Data1));
 
+                Sleep(20);
 				PC_DataChange(0, PC_D_INTERFACE_IR2, DEVCODE_D, PC_D_INTERFACE_IR_LEN2);
 				ClientSocket_PC->Socket->SendBuf(&pc_Data, sizeof(pc_Data));        // should comment for emulator
 				ClientSocket_PC->Socket->SendBuf(&pc_Interface_IR_Data2, sizeof(pc_Interface_IR_Data2));
 
+                Sleep(20);
 				PC_DataChange(0, PC_D_INTERFACE_OCV1, DEVCODE_D, PC_D_INTERFACE_OCV_LEN1);
 				ClientSocket_PC->Socket->SendBuf(&pc_Data, sizeof(pc_Data));        // should comment for emulator
 				ClientSocket_PC->Socket->SendBuf(&pc_Interface_Ocv_Data1, sizeof(pc_Interface_Ocv_Data1));
 
+                Sleep(20);
 				PC_DataChange(0, PC_D_INTERFACE_OCV2, DEVCODE_D, PC_D_INTERFACE_OCV_LEN2);
 				ClientSocket_PC->Socket->SendBuf(&pc_Data, sizeof(pc_Data));        // should comment for emulator
 				ClientSocket_PC->Socket->SendBuf(&pc_Interface_Ocv_Data2, sizeof(pc_Interface_Ocv_Data2));
@@ -461,5 +465,34 @@ AnsiString __fastcall TMod_PLC::GetString(unsigned char (*data)[2], int column, 
 	}
 
 	return m_GetStringValue.Trim();
+}
+//---------------------------------------------------------------------------
+int __fastcall TMod_PLC::GetIRValue(int pc_address, int index)
+{
+    int lowWord, highWord;
+    if(index < 200){
+    	lowWord = GetDouble(pc_Interface_IR_Data1, pc_address + (index * 2));
+    	highWord = GetDouble(pc_Interface_IR_Data1, pc_address + (index * 2) + 1);
+    } else{
+        index = index - 200;
+        lowWord = GetDouble(pc_Interface_IR_Data2, pc_address + (index * 2));
+    	highWord = GetDouble(pc_Interface_IR_Data2, pc_address + (index * 2) + 1);
+    }
+    return (highWord << 16) | lowWord;
+}
+//---------------------------------------------------------------------------
+int __fastcall TMod_PLC::GetOCVValue(int pc_address, int index)
+{
+    int lowWord, highWord;
+    if(index < 200){
+    	lowWord = GetDouble(pc_Interface_Ocv_Data1, pc_address + (index * 2));
+    	highWord = GetDouble(pc_Interface_Ocv_Data1, pc_address + (index * 2) + 1);
+    } else{
+        index = index - 200;
+        lowWord = GetDouble(pc_Interface_Ocv_Data2, pc_address + (index * 2));
+    	highWord = GetDouble(pc_Interface_Ocv_Data2, pc_address + (index * 2) + 1);
+    }
+
+    return (highWord << 16) | lowWord;
 }
 //---------------------------------------------------------------------------

@@ -2,8 +2,8 @@
 #define RVMO_define
 
 
-//#define APP_PATH					"D:\\IROCV\\"
-#define APP_PATH					"C:\\IROCV_r\\"
+#define APP_PATH					"D:\\IROCV_RO\\"
+//#define APP_PATH					"C:\\IROCV_r\\"
 #define BIN_PATH			  		APP_PATH"Bin\\"
 #define MSA_PATH			  		APP_PATH"Msa\\"
 #define DATA_PATH					APP_PATH"Data\\"

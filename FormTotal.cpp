@@ -131,6 +131,7 @@ void __fastcall TTotalForm::InitTrayStruct()
 
 	this->WriteRemeasureInfo();
 	tray.trayid = "start";
+    pb->Position = 0;
 
 	for(int i=0; i<cell_num; ++i){
 		tray.cell[i] = 1;	//CELL INFO
@@ -667,7 +668,31 @@ void __fastcall TTotalForm::BadListDrawItem(TCustomListView *Sender,
 
 void __fastcall TTotalForm::StatusTimerTimer(TObject *Sender)
 {
-	if(stage.now_status != stage.alarm_status){
+    if(stage.arl == nLocal){
+        DisplayError("");
+
+        if(!Mod_PLC->ClientSocket_PC->Active && !Mod_PLC->ClientSocket_PLC->Active){
+            ErrorCheckStatus = "PLC - PC Connection Fail.";
+        	DisplayError(ErrorCheckStatus, true);
+        }
+
+        if(Mod_PLC->GetDouble(Mod_PLC->plc_Interface_Data, PLC_D_IROCV_ERROR)) {
+            ErrorCheckStatus = "PLC - Error!";
+        	DisplayError(ErrorCheckStatus, true);
+        }
+
+        if(!Client->Active){
+            ErrorCheckStatus = "IR/OCV Connection Fail.";
+        	DisplayError(ErrorCheckStatus, true);
+        }
+    }
+
+    StageStatus();
+}
+//---------------------------------------------------------------------------
+void __fastcall TTotalForm::StageStatus()
+{
+    if(stage.now_status != stage.alarm_status){
 		stage.now_status = stage.alarm_status;
 		stage.alarm_cnt = 0;
 	}
@@ -718,8 +743,6 @@ void __fastcall TTotalForm::StatusTimerTimer(TObject *Sender)
 			break;
 	}
 }
-//---------------------------------------------------------------------------
-
 // 그룹박스 보여주기
 void __fastcall TTotalForm::VisibleBox(TGroupBox *grp)
 {
@@ -1305,39 +1328,43 @@ void __fastcall TTotalForm::chkBypassMouseUp(TObject *Sender,
 //---------------------------------------------------------------------------
 void __fastcall TTotalForm::btnManualClick(TObject *Sender)
 {
-	stage.arl_reserve = nLocal;
-	stage.arl = nLocal;
-    bLocal = true;
+    if(MessageBox(Handle, L"Do you want to change IR/OCV to MANUAL MODE?", L"", MB_YESNO|MB_ICONQUESTION) == ID_YES){
+        stage.arl_reserve = nLocal;
+        stage.arl = nLocal;
+        bLocal = true;
 
-	tray.amf = false;
-	tray.ams = false;
+        tray.amf = false;
+        tray.ams = false;
 
-	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_STAGE_AUTO_READY, 0);
+        Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_STAGE_AUTO_READY, 0);
 
-//	Timer_AutoInspection->Enabled = false;
-	this->CmdManualMod(true);
-	VisibleBox(GrpLocal);
+    //	Timer_AutoInspection->Enabled = false;
+        this->CmdManualMod(true);
+        VisibleBox(GrpLocal);
 
 
-	btnManual->Color = StageBtn4->Color;
-	btnAuto->Color = btnConfig->Color;
+        btnManual->Color = StageBtn4->Color;
+        btnAuto->Color = btnConfig->Color;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TTotalForm::btnAutoClick(TObject *Sender)
 {
-	stage.arl_reserve = nAuto;
-	stage.arl = nAuto;
-	bLocal = false;
-	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_STAGE_AUTO_READY, 1);
-//    Timer_AutoInspection->Enabled = false;
-    MeasureInfoForm->pLocal->Visible = false;
-	this->CmdManualMod(false);
-	VisibleBox(GrpMain);
+    if(MessageBox(Handle, L"Do you want to change IR/OCV to AUTO MODE?", L"", MB_YESNO|MB_ICONQUESTION) == ID_YES){
+        stage.arl_reserve = nAuto;
+        stage.arl = nAuto;
+        bLocal = false;
+        Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_STAGE_AUTO_READY, 1);
+    //    Timer_AutoInspection->Enabled = false;
+        MeasureInfoForm->pLocal->Visible = false;
+        this->CmdManualMod(false);
+        VisibleBox(GrpMain);
 
-	Panel_State->Caption = "IR/OCV is ready...";
+        Panel_State->Caption = "IR/OCV is ready...";
 
-	btnAuto->Color = StageBtn4->Color;
-	btnManual->Color = btnConfig->Color;
+        btnAuto->Color = StageBtn4->Color;
+        btnManual->Color = btnConfig->Color;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TTotalForm::SetRemeasureList()
@@ -1615,9 +1642,6 @@ void __fastcall TTotalForm::Timer_AutoInspectionTimer(TObject *Sender)
 		WritePLCLog("IROCV STAGE AUTO/MANUAL", IROCVStage);
 	}
 
-
-
-
 	/* 2021-08-23 comment for test
 
 	{
@@ -1647,10 +1671,12 @@ void __fastcall TTotalForm::Timer_AutoInspectionTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 bool __fastcall TTotalForm::ErrorCheck()
 {
+    DisplayError("");
 	if(!Mod_PLC->ClientSocket_PC->Active && !Mod_PLC->ClientSocket_PLC->Active)
 	{
 		ErrorCheckStatus = "PLC - PC Connection Fail.";
-		Panel_State->Caption = ErrorCheckStatus;
+		DisplayError(ErrorCheckStatus, true);
+
 		if(OldErrorCheckStatus != ErrorCheckStatus) {
 			OldErrorCheckStatus = ErrorCheckStatus;
 			WritePLCLog("ErrorCheck", ErrorCheckStatus);
@@ -1660,8 +1686,9 @@ bool __fastcall TTotalForm::ErrorCheck()
 
 	if(Mod_PLC->GetDouble(Mod_PLC->plc_Interface_Data, PLC_D_IROCV_ERROR))
 	{
-		ErrorCheckStatus = "PLC - Error!!";
-		Panel_State->Caption = PLCStatus;
+		ErrorCheckStatus = "PLC - Error!";
+		DisplayError(ErrorCheckStatus, true);
+
 		if(OldErrorCheckStatus != ErrorCheckStatus) {
 			OldErrorCheckStatus = ErrorCheckStatus;
 			WritePLCLog("ErrorCheck", ErrorCheckStatus);
@@ -1674,13 +1701,15 @@ bool __fastcall TTotalForm::ErrorCheck()
 
 	if(!Client->Active)
 	{
-	  Panel_State->Caption = "IR/OCV Connection Fail.";
-	   return true;
+        ErrorCheckStatus = "IR/OCV Connection Fail.";
+		DisplayError(ErrorCheckStatus, true);
+		return true;
 	}
 
 	if(bLocal == true && Mod_PLC->GetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_STAGE_AUTO_READY) == 0)
 	{
-		Panel_State->Caption = "IR/OCV is not in AutoMode";
+        ErrorCheckStatus = "IR/OCV is not in AutoMode.";
+		DisplayError(ErrorCheckStatus, true);
 		return true;
 	}
 
@@ -1756,7 +1785,7 @@ void __fastcall TTotalForm::AutoInspection_Wait()
 			{
 				DisplayTrayInfo();
 
-				if(start_delay_time > 10){
+				if(start_delay_time > 1){
 
 					WriteTrayInfo();
 					DisplayProcess(sProbeDown, "AutoInspection_Wait", " PROBE IS CLOSED ... ");
@@ -1849,7 +1878,7 @@ void __fastcall TTotalForm::AutoInspection_Measure()
 				DisplayProcess(sProbeDown, "AutoInspection_Measure", "PLC - PROBE CLOSED");
 
 				Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_PROB_CLOSE, 0);
-				if(nStepCount > 10)
+				if(nStepCount > 1)
 				{
 					DisplayProcess(sMeasure, "AutoInspection_Measure", "IR/OCV Re-Measure Start");
 					if(retest.re_excute) RemeasureExcute();  // partly remeasure
@@ -1885,7 +1914,11 @@ void __fastcall TTotalForm::AutoInspection_Measure()
 				measureTime = 3600*h+60*m+s;
 				Time_Libel->Caption = IntToStr(measureTime);
 
-				CmdTrayOut();                                  // badinformation, writeresultfile, trayout
+                if(chkCycle->Checked == false)
+					CmdTrayOut();                                  // badinformation, writeresultfile, trayout
+                else
+                    CmdTrayOut_Cycle();
+
 				nSection = STEP_FINISH;
 				nStep = 0;
 			}
@@ -2065,6 +2098,13 @@ void __fastcall TTotalForm::lblTitleClick(TObject *Sender)
 void __fastcall TTotalForm::Label8Click(TObject *Sender)
 {
 //	Label12->Visible = !Label12->Visible;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTotalForm::Label8DblClick(TObject *Sender)
+{
+    chkCycle->Visible = !chkCycle->Visible;
+    chkBypass->Visible = !chkBypass->Visible;
 }
 //---------------------------------------------------------------------------
 

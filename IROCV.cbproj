@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>IROCV.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
     </PropertyGroup>
@@ -107,7 +107,7 @@
         <Icon_MainIcon>IROCV_210113_002_Icon.ico</Icon_MainIcon>
         <DynamicRTL>false</DynamicRTL>
         <UsePackages>false</UsePackages>
-        <LinkPackageStatics>rtl.lib;vcl.lib;Tee.lib;vclimg.lib;vclx.lib;vcldb.lib;dbrtl.lib;TMSVCLUIPackPkgExDXE10.lib;DbxCommonDriver.lib;dsnap.lib;TMSVCLUIPackPkgDXE10.lib;adortl.lib;soaprtl.lib;xmlrtl.lib;inet.lib;vclactnband.lib;VclSmp.lib</LinkPackageStatics>
+        <LinkPackageStatics>rtl.lib;vcl.lib;Tee.lib;vclimg.lib;vclx.lib;vcldb.lib;dbrtl.lib;DbxCommonDriver.lib;dsnap.lib;adortl.lib;soaprtl.lib;xmlrtl.lib;inet.lib;vclactnband.lib;VclSmp.lib;TMSSmoothControlsPackPkgDXE10.lib</LinkPackageStatics>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
@@ -329,12 +329,6 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\IROCV.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32">
-                        <RemoteName>IROCV.exe</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true'" LocalName="$(BDS)\bin64\cc64240mt.dll" Class="DependencyModule">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
@@ -348,6 +342,12 @@
                 </DeployFile>
                 <DeployFile Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'!='true'" LocalName="$(BDS)\bin\cc32c240.dll" Class="DependencyModule">
                     <Platform Name="Win32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\IROCV.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>IROCV.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

@@ -66,6 +66,8 @@ bool __fastcall TTotalForm::ReadSystemInfo()
 	config.ocv_min = ini->ReadFloat("MAIN", "OCV1", 1600);
 	config.ocv_max = ini->ReadFloat("MAIN", "OCV2", 4000);
 
+    pnlIRSpec->Caption = "IR : " + FormatFloat("0.0", config.ir_min)  + " ~ " + FormatFloat("0.0", config.ir_max);
+    pnlOCVSpec->Caption = "OCV : " + FormatFloat("0.0", config.ocv_min) + " ~ " + FormatFloat("0.0", config.ocv_max);
 
 	editPLCIPAddress->Text = ini->ReadString("IROCV_PLC", "IP", "17.91.80.220");
 	editPLCPortPC->Text = ini->ReadString("IROCV_PLC", "PORT1", "5007");

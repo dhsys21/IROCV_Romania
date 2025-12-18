@@ -252,11 +252,16 @@ void __fastcall TBaseForm::advPLCInterfaceShowClick(TObject *Sender)
 	Form_PLCInterface->Left = 500;
 	Form_PLCInterface->Top = 85;
 	Form_PLCInterface->Visible = true;
+
+    Form_PLCInterface->WindowState = wsNormal;
+    Form_PLCInterface->BringToFront();
 }
 //---------------------------------------------------------------------------
 void __fastcall TBaseForm::btnInitClick(TObject *Sender)
 {
-    nForm[0]->Initialization();
+    if(MessageBox(Handle, L"Do you want to initialize the IR/OCV?", L"", MB_YESNO|MB_ICONQUESTION) == ID_YES){
+    	nForm[0]->Initialization();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TBaseForm::Label1Click(TObject *Sender)
@@ -278,3 +283,75 @@ double __fastcall TBaseForm::StringToDouble(UnicodeString str, double def)
 	else return def;
 }
 //---------------------------------------------------------------------------
+vector<int> __fastcall TBaseForm::StringToVector(UnicodeString str)
+{
+	vector<int> numbers;
+
+	int start = 1, end = 0;
+	while((end = str.Pos(",")) > 0)
+	{
+		UnicodeString temp = str.SubString(start, end - start);
+		numbers.push_back(temp.ToIntDef(0));
+		str.Delete(start, end);
+	}
+	numbers.push_back(str.SubString(start, str.Length() - start + 1).ToIntDef(0));
+
+    return numbers;
+}
+//---------------------------------------------------------------------------
+void __fastcall TBaseForm::btnViewLogClick(TObject *Sender)
+{
+    OpenFolder(LOG_PATH);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBaseForm::btnViewDataClick(TObject *Sender)
+{
+    OpenFolder(DATA_PATH);
+}
+//---------------------------------------------------------------------------
+void __fastcall TBaseForm::OpenFolder(UnicodeString path)
+{
+	 ShellExecute(NULL, L"open", path.c_str(), NULL, NULL, SW_SHOW);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBaseForm::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+    if (MessageDlg("Close the form?", mtConfirmation, TMsgDlgButtons() << mbOK << mbCancel,1) == mrOk){
+		pPassword->Visible = !pPassword->Visible;
+        pPassword->BringToFront();
+	}
+	CanClose = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBaseForm::PasswordBtnClick(TObject *Sender)
+{
+    if(PassEdit->Text == "0000"){
+        for(int i=0; i<FormCnt ;++i){
+			nForm[i]->Close();
+		}
+
+		Application->Terminate();
+	}
+	else{
+		MessageBox(Handle, L"Are you sure you’re spelling your password correctly?", L"ERROR", MB_OK|MB_ICONERROR);
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBaseForm::cancelBtn2Click(TObject *Sender)
+{
+    pPassword->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TBaseForm::PassEditKeyPress(TObject *Sender, System::WideChar &Key)
+{
+    if(Key == VK_RETURN){
+		PasswordBtnClick(Sender);
+	}
+}
+//---------------------------------------------------------------------------
+

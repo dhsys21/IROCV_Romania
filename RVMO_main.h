@@ -49,6 +49,13 @@ __published:	// IDE-managed Components
 	TImage *Image1;
 	TImage *Image7;
 	TImage *Image8;
+	TAdvSmoothButton *btnViewLog;
+	TAdvSmoothButton *btnViewData;
+	TPanel *pPassword;
+	TPanel *Panel61;
+	TEdit *PassEdit;
+	TAdvSmoothButton *cancelBtn2;
+	TAdvSmoothButton *PasswordBtn;
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall ClockTimerTimer(TObject *Sender);
@@ -58,6 +65,12 @@ __published:	// IDE-managed Components
 	void __fastcall advPLCInterfaceShowClick(TObject *Sender);
 	void __fastcall btnInitClick(TObject *Sender);
 	void __fastcall Label1Click(TObject *Sender);
+	void __fastcall btnViewLogClick(TObject *Sender);
+	void __fastcall btnViewDataClick(TObject *Sender);
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+	void __fastcall PasswordBtnClick(TObject *Sender);
+	void __fastcall cancelBtn2Click(TObject *Sender);
+	void __fastcall PassEditKeyPress(TObject *Sender, System::WideChar &Key);
 
 
 private:	// User declarations
@@ -73,7 +86,7 @@ private:	// User declarations
 	int DeleteIndex;
 	bool __fastcall DeleteLogFile(AnsiString FileName);
 	bool __fastcall DeleteLogFolder(AnsiString FolderName);
-
+    void __fastcall OpenFolder(UnicodeString path);
 	void __fastcall WriteTrayLog(AnsiString msg);
 
 	AnsiString m_sTrayID;
@@ -98,6 +111,7 @@ public:		// User declarations
 
 	double __fastcall StringToDouble(UnicodeString str, double def);
 	int __fastcall StringToInt(UnicodeString str, int def);
+	vector<int> __fastcall StringToVector(UnicodeString str);
 
 	TDateTime rem_date;
 	TImage *statusImage[13];

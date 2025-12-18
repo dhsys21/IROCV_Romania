@@ -158,7 +158,8 @@ void __fastcall TCaliForm::WriteCaliFile(bool Data)
 		if(FileExists(FileName))DeleteFile(FileName);
 		file_handle = FileCreate(FileName);
 		FileSeek(file_handle, 0, 0);
-		str = "Channel,STANDARD,MEASURE,OFFSET,OCV_STANDARD,OCV_MEASURE,OCV_OFFSET\r\n";
+//		str = "Channel,STANDARD,MEASURE,OFFSET,OCV_STANDARD,OCV_MEASURE,OCV_OFFSET\r\n";
+        str = "Channel,STANDARD,MEASURE,OFFSET\r\n";
 		FileWrite(file_handle, str.c_str(), str.Length());
 		for(int i=0; i<cell_num; ++i){
 			str = IntToStr(i+1) + "," + pstandard[i]->Text + "," + pmeasure[i]->Caption + ","+ poffset[i]->Caption +"\r\n";

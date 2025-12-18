@@ -42,6 +42,7 @@ __published:	// IDE-managed Components
 	TPanel *pnormal2;
 	TPanel *pnormal1;
 	TPanel *Panel1;
+	TPanel *Panel3;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormHide(TObject *Sender);

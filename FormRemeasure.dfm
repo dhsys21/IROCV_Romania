@@ -221,7 +221,6 @@ object RemeasureForm: TRemeasureForm
       Appearance.Font.Name = 'Tahoma'
       Appearance.Font.Style = [fsBold]
       Appearance.Spacing = 0
-      Appearance.SimpleLayout = False
       Appearance.Rounding = 3
       Appearance.WordWrapping = False
       Status.Caption = '0'
@@ -244,13 +243,13 @@ object RemeasureForm: TRemeasureForm
       Color = clWhite
       ParentFont = False
       TabOrder = 7
-      Version = '2.2.1.4'
+      Version = '2.1.1.5'
       OnClick = AccInitBtnClick
       TMSStyle = 8
     end
   end
   object pstage: TPanel
-    Left = 14
+    Left = 8
     Top = 17
     Width = 106
     Height = 20
@@ -341,6 +340,23 @@ object RemeasureForm: TRemeasureForm
       ParentFont = False
       TabOrder = 3
     end
+  end
+  object Panel3: TPanel
+    Left = 121
+    Top = 17
+    Width = 400
+    Height = 20
+    BevelOuter = bvNone
+    Caption = 'IR/OCV'
+    Color = 8552834
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 3
   end
   object SaveDialog: TSaveDialog
     DefaultExt = '*.csv'

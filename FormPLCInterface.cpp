@@ -1,4 +1,5 @@
-﻿#pragma link "AdvSmoothButton"
+﻿#pragma link "AdvSmoothPanel"
+#pragma link "AdvSmoothButton"
 //---------------------------------------------------------------------------
 
 #include <vcl.h>
@@ -166,26 +167,16 @@ void __fastcall TForm_PLCInterface::Timer_UpdateTimer(TObject *Sender)
 		}
 
 		// IROCV RESULT IR VALUE
-		for(int i = 0; i < 200; i++)
-			ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetDouble(Mod_PLC->pc_Interface_IR_Data1, PC_D_IROCV_IR_VALUE + (i * 2));
-		for(int i = 0; i < 200; i++)
-			ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetDouble(Mod_PLC->pc_Interface_IR_Data2, PC_D_IROCV_IR_VALUE + (i * 2));
+		for(int i = 0; i < 400; i++)
+            ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetIRValue(PC_D_IROCV_IR_VALUE, i);
 
 		// IROCV RESULT OCV VALUE
-		for(int i = 0; i < 200; i++)
-			ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetDouble(Mod_PLC->pc_Interface_Ocv_Data1, PC_D_IROCV_OCV_VALUE + (i * 2));
-		for(int i = 0; i < 200; i++)
-			ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetDouble(Mod_PLC->pc_Interface_Ocv_Data2, PC_D_IROCV_OCV_VALUE + (i * 2));
+		for(int i = 0; i < 400; i++)
+            ListView_PC->Items->Item[index++]->SubItems->Strings[1] = Mod_PLC->GetOCVValue(PC_D_IROCV_OCV_VALUE, i);
 	}
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm_PLCInterface::AdvSmoothButton_CloseClick(TObject *Sender)
-{
-    Timer_Update->Enabled = false;
-	this->Close();
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm_PLCInterface::Button1Click(TObject *Sender)
 {
@@ -219,9 +210,18 @@ void __fastcall TForm_PLCInterface::Button1Click(TObject *Sender)
 	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, test_bit, insert_data);
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm_PLCInterface::GroupBox_PLC_PCClick(TObject *Sender)
+
+void __fastcall TForm_PLCInterface::btnTestModeClick(TObject *Sender)
 {
-//	Panel1->Visible = !Panel1->Visible;
+    double ir_base = BaseForm->StringToDouble(editIR->Text, 1);
+	double ocv_base = BaseForm->StringToDouble(editOCV->Text, 1);
+    BaseForm->nForm[0]->CmdTrayOut_Cycle();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm_PLCInterface::GroupBox_PLC_PCDblClick(TObject *Sender)
+{
+    Panel1->Visible = !Panel1->Visible;
 }
 //---------------------------------------------------------------------------
 

@@ -308,6 +308,8 @@ __published:	// IDE-managed Components
 	TPanel *pIrValue;
 	TPanel *Panel9;
 	TPanel *pPos;
+	TPanel *pnlIRSpec;
+	TPanel *pnlOCVSpec;
 	void __fastcall ClientConnect(TObject *Sender,
 		  TCustomWinSocket *Socket);
 	void __fastcall ClientDisconnect(TObject *Sender,
@@ -358,6 +360,7 @@ __published:	// IDE-managed Components
 	void __fastcall btnConnectIROCVClick(TObject *Sender);
 	void __fastcall lblTitleClick(TObject *Sender);
 	void __fastcall Label8Click(TObject *Sender);
+	void __fastcall Label8DblClick(TObject *Sender);
 
 private:	// User declarations
 //------------ Æû °ü·Ã -------------------//
@@ -409,6 +412,8 @@ private:	// User declarations
 	void __fastcall StageLocalRemeasure(bool frm = false);
 	void __fastcall StageClearAlarm();
 	void __fastcall StageReady();
+    void __fastcall StageStatus();
+    void __fastcall DisplayError(AnsiString msg, bool bError = false);
 
 	void __fastcall SensorInputProcess(AnsiString param);
 	void __fastcall SensorOutputProcess(AnsiString param);
@@ -465,6 +470,7 @@ public:		// User declarations
 	void __fastcall CmdBattHeight(int height = 1);
 	void __fastcall CmdGetSensorInfo();
 	void __fastcall CmdTrayOut();
+    void __fastcall CmdTrayOut_Cycle();
 	void __fastcall CmdTrayOut_Original();
 	void __fastcall CmdForceStop();
     void __fastcall CmdForceStop_Original();

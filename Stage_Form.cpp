@@ -174,6 +174,23 @@ void __fastcall TTotalForm::DisplayProcess(int status, AnsiString Status_Step, A
 		WriteCommLog(Status_Step, PLCStatus);
 	}
 }
+//---------------------------------------------------------------------------
+void __fastcall TTotalForm::DisplayError(AnsiString msg, bool bError)
+{
+    Panel_State->Caption = msg;
+
+	if(bError == true)
+	{
+        Panel_State->Color = clRed;
+		Panel_State->Font->Color = clWhite;
+	}
+	else
+	{
+        Panel_State->Color = clWhite;
+		Panel_State->Font->Color = clBlack;
+    }
+}
+//---------------------------------------------------------------------------
 // 메인화면 검사 진행 표시
 void __fastcall TTotalForm::DisplayStatus(int status)
 {
@@ -211,7 +228,7 @@ void __fastcall TTotalForm::DisplayStatus(int status)
 	else if(stage.arl == nAuto || status >= 23)VisibleBox(GrpMain);
 }
 
-
+//---------------------------------------------------------------------------
 void __fastcall TTotalForm::ResponseError(AnsiString param)
 {
 	int err_sort = param.SubString(1, 3).ToInt();
@@ -224,7 +241,7 @@ void __fastcall TTotalForm::ResponseError(AnsiString param)
 			break;
 	}
 }
-
+//---------------------------------------------------------------------------
 void __fastcall TTotalForm::ErrorMsg(int err)
 {
 	AnsiString err1, err2, err3, err4;
@@ -296,4 +313,5 @@ void __fastcall TTotalForm::ErrorMsg(int err)
 		//VisibleBox(GrpError);
 	}
 }
+//---------------------------------------------------------------------------
 

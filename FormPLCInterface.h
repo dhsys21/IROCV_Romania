@@ -10,6 +10,7 @@
 #include <ExtCtrls.hpp>
 #include <ComCtrls.hpp>
 #include "AdvSmoothButton.hpp"
+#include "AdvSmoothPanel.hpp"
 //---------------------------------------------------------------------------
 class TForm_PLCInterface : public TForm
 {
@@ -18,8 +19,13 @@ __published:	// IDE-managed Components
 	TListView *ListView_PLC;
 	TListView *ListView_PC;
 	TTimer *Timer_Update;
-	TAdvSmoothButton *AdvSmoothButton_Close;
-	TPanel *Panel1;
+	TAdvSmoothPanel *Panel1;
+	TLabel *Label4;
+	TAdvSmoothButton *AdvSmoothButton9;
+	TPanel *Panel30;
+	TPanel *Panel32;
+	TEdit *Edit6;
+	TEdit *Edit7;
 	TLabel *Label1;
 	TEdit *Edit1;
 	TLabel *Label2;
@@ -27,17 +33,24 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TLabel *Label3;
 	TRadioButton *RadioButton1;
+	TRadioButton *RadioButton6;
 	TRadioButton *RadioButton2;
 	TRadioButton *RadioButton3;
 	TRadioButton *RadioButton4;
 	TRadioButton *RadioButton5;
-	TRadioButton *RadioButton6;
+	TLabel *Label5;
+	TEdit *editIR;
+	TLabel *Label6;
+	TEdit *editOCV;
+	TButton *btnTestMode;
+	TEdit *editNGChannel;
+	TLabel *Label7;
 	void __fastcall Timer_UpdateTimer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
-	void __fastcall AdvSmoothButton_CloseClick(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
-	void __fastcall GroupBox_PLC_PCClick(TObject *Sender);
+	void __fastcall btnTestModeClick(TObject *Sender);
+	void __fastcall GroupBox_PLC_PCDblClick(TObject *Sender);
 private:	// User declarations
     void __fastcall SetListViewPLC();
 	void __fastcall SetListViewPC();
