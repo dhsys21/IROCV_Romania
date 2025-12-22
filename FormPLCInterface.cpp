@@ -225,3 +225,11 @@ void __fastcall TForm_PLCInterface::GroupBox_PLC_PCDblClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm_PLCInterface::Button2Click(TObject *Sender)
+{
+    int address = Edit1->Text.ToIntDef(25000); //* 21000, 22700
+	int value = Edit2->Text.ToIntDef(1);
+    Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, address - 25000, value);
+}
+//---------------------------------------------------------------------------
+

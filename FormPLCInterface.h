@@ -45,12 +45,14 @@ __published:	// IDE-managed Components
 	TButton *btnTestMode;
 	TEdit *editNGChannel;
 	TLabel *Label7;
+	TButton *Button2;
 	void __fastcall Timer_UpdateTimer(TObject *Sender);
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall btnTestModeClick(TObject *Sender);
 	void __fastcall GroupBox_PLC_PCDblClick(TObject *Sender);
+	void __fastcall Button2Click(TObject *Sender);
 private:	// User declarations
     void __fastcall SetListViewPLC();
 	void __fastcall SetListViewPC();

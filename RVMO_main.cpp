@@ -20,7 +20,7 @@ __fastcall TBaseForm::TBaseForm(TComponent* Owner)
 {
 	ErrorCount = 0;
 	FormCnt = 1;
-	DeleteDay = 90;
+	DeleteDay = 180;
 	DeleteIndex = 0;
 	rem_date = Now();
 	this->Left = 960;
@@ -114,8 +114,14 @@ void __fastcall TBaseForm::ClockTimerTimer(TObject *Sender)
 		AdvSmoothPanel_PLC->Fill->ColorTo = poff->Color;
 	}
 
+    if(Mod_PLC->GetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_ERROR) == 1
+		|| Mod_PLC->GetDouble(Mod_PLC->plc_Interface_Data, PLC_D_IROCV_ERROR) == 1)
+		advPLCInterfaceShow->Color = poff->Color;
+	else
+        advPLCInterfaceShow->Color = clWhite;
+
 	if(Now().FormatString("hhnn") == "0700") {
-		DeleteDay = 90;	// 12시가 되면 DeleteDay를 90으로 초기화
+		DeleteDay = 180;	// 12시가 되면 DeleteDay를 90으로 초기화
 	}
 }
 //---------------------------------------------------------------------------

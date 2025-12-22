@@ -31,7 +31,7 @@ object Form_PLCInterface: TForm_PLCInterface
     TabOrder = 0
     OnDblClick = GroupBox_PLC_PCDblClick
     object ListView_PLC: TListView
-      Left = 16
+      Left = 21
       Top = 32
       Width = 535
       Height = 769
@@ -317,7 +317,7 @@ object Form_PLCInterface: TForm_PLCInterface
       end
       object Edit1: TEdit
         Left = 40
-        Top = 51
+        Top = 55
         Width = 225
         Height = 24
         Font.Charset = DEFAULT_CHARSET
@@ -327,7 +327,7 @@ object Form_PLCInterface: TForm_PLCInterface
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 5
-        Text = '40030'
+        Text = '25000'
       end
       object Edit2: TEdit
         Left = 40
@@ -341,11 +341,11 @@ object Form_PLCInterface: TForm_PLCInterface
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 6
-        Text = '2800'
+        Text = '1'
       end
       object Button1: TButton
         Left = 36
-        Top = 132
+        Top = 131
         Width = 121
         Height = 33
         Caption = #51204#49569
@@ -491,6 +491,15 @@ object Form_PLCInterface: TForm_PLCInterface
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 17
+      end
+      object Button2: TButton
+        Left = 271
+        Top = 49
+        Width = 121
+        Height = 33
+        Caption = 'Write'
+        TabOrder = 18
+        OnClick = Button2Click
       end
     end
   end

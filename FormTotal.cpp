@@ -1694,7 +1694,8 @@ bool __fastcall TTotalForm::ErrorCheck()
 			WritePLCLog("ErrorCheck", ErrorCheckStatus);
 		}
 
-		CmdForceStop_Original();
+        //* 2025 12 22 주석처리
+		// CmdForceStop_Original();
 		Initialization();
 		return true;
 	}
