@@ -90,9 +90,9 @@ void __fastcall TBaseForm::MakePanel()
 void __fastcall TBaseForm::FormClose(TObject *Sender, TCloseAction &Action)
 {
 	for(int i=0; i<FormCnt ;++i){
+        nForm[i]->WriteRemeasureInfo();
 		nForm[i]->Close();
 	}
-//	Mod_PLC->m_Thread_PLC->DisConnect();
 }
 //---------------------------------------------------------------------------
 
