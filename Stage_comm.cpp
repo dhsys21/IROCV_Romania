@@ -29,6 +29,7 @@ void __fastcall TTotalForm::CmdForceStop()
 {
 	// 검사종료	- Probe 해제 및 Tray 검사 대기
 	MakeData(1, "STP");
+    Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_COMPLETE, 1);
 	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_PROB_CLOSE, 0);
 	Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Data, PC_D_IROCV_PROB_OPEN, 1);
 	WritePLCLog("CmdForceStop", "IROCV PROBE OPEN = 1");
@@ -79,26 +80,22 @@ void __fastcall TTotalForm::CmdTrayOut_Cycle()
 	// 2 Word :  value / (65536 / 2) => 윗 주소에 쓰기, value % (65536 /2 ) => 아래 주소에 쓰기 // herald 2017 11 30
 	for(int i = 0; i < 200; i++)
 	{
-//        tray.after_value[i] = BaseForm->StringToDouble(Form_PLCInterface->editIR->Text, 0) + (double)(i * 0.01);
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data1, PC_D_IROCV_IR_VALUE + (i * 2), FormatFloat("0000", (tray.after_value[i] * 100)) % (256 * 256));
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data1, PC_D_IROCV_IR_VALUE + (i * 2) + 1, (tray.after_value[i] * 100) / (256 * 256));
 	}
 	for(int i = 0; i < 200; i++)
 	{
-//		tray.after_value[200 + i] = BaseForm->StringToDouble(Form_PLCInterface->editIR->Text, 0) + (double)((i + 200) * 0.01);
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data2, PC_D_IROCV_IR_VALUE + (i * 2), FormatFloat("0000", (tray.after_value[200 + i] * 100)) % (256 * 256));
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_IR_Data2, PC_D_IROCV_IR_VALUE + (i * 2) + 1, (tray.after_value[200+i] * 100) / (256 * 256));
 	}
 
 	for(int i = 0; i < 200; i++)
 	{
-//        tray.ocv_value[i] = BaseForm->StringToDouble(Form_PLCInterface->editOCV->Text, 0) + (double)(i * 0.1);
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data1, PC_D_IROCV_OCV_VALUE + (i * 2), FormatFloat("00000", (tray.ocv_value[i] * 10)) % (256 * 256));
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data1, PC_D_IROCV_OCV_VALUE + (i * 2) + 1, (tray.ocv_value[i] * 10) / (256 * 256));
 	}
 	for(int i = 0; i < 200; i++)
 	{
-//        tray.ocv_value[200 + i] = BaseForm->StringToDouble(Form_PLCInterface->editOCV->Text, 0) + (double)((i + 200) * 0.1);
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data2, PC_D_IROCV_OCV_VALUE + (i * 2), FormatFloat("00000", (tray.ocv_value[200 + i] * 10)) % (256 * 256));
 		Mod_PLC->SetDouble(Mod_PLC->pc_Interface_Ocv_Data2, PC_D_IROCV_OCV_VALUE + (i * 2) + 1, (tray.ocv_value[200+i] * 10) / (256 * 256));
 	}
@@ -200,16 +197,17 @@ void __fastcall TTotalForm::CmdGetSensorInfo()
 //---------------------------------------------------------------------------
 void __fastcall TTotalForm::CmdManualMod(bool Set)
 {
+    PLCInitialization();
+    this->InitTrayStruct();
+
 	if(Set){ //* Manual
 		SendData("MAN", "O");
-		this->InitTrayStruct();
 
         if(Timer_AutoInspection->Enabled == true)
             Timer_AutoInspection->Enabled = false;
 	}
 	else{ //* Auto
 		SendData("MAN", "X");
-		this->InitTrayStruct();
 
         if(Timer_AutoInspection->Enabled == false)
             Timer_AutoInspection->Enabled = true;

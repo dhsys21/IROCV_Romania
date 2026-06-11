@@ -90,6 +90,7 @@ const int PC_D_IROCV_IR_MIN							=   11;
 const int PC_D_IROCV_IR_MAX							=   13;
 const int PC_D_IROCV_OCV_MIN						=   15;
 const int PC_D_IROCV_OCV_MAX						=   17;
+const int PC_D_IROCV_COMPLETE                       =   19;
 
 // OK/NG
 const int PC_D_IROCV_MEASURE_OK_NG_01			   	=	20;
